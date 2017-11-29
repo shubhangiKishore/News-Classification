@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov 27 15:27:05 2017
 
-@author: vijaynandwani
-"""
 
-"""
 To create sub directories of news with one news file
 
 with open('news', 'r') as f:
@@ -30,8 +26,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 
 
-category_list = ["sport", "world", "us", "business", "health", "entertainment", "sci_tech"]
-directory_list = ["data/sport/*.txt", "data/world/*.txt","data/us/*.txt","data/business/*.txt","data/health/*.txt","data/entertainment/*.txt","data/sci_tech/*.txt",]
+baydirectory_list = ["data/sport/*.txt", "data/world/*.txt","data/us/*.txt","data/business/*.txt","data/health/*.txt","data/entertainment/*.txt","data/sci_tech/*.txt",]
 
 text_files = list(map(lambda x: glob.glob(x), directory_list))
 text_files = [item for sublist in text_files for item in sublist]
@@ -48,6 +43,8 @@ for t in text_files:
 training_data[0]
 
 training_data = pandas.DataFrame(training_data, columns=['data', 'flag'])
+
+training_data.to_csv("train_data", sep=',', encoding='utf-8')
 
 print(training_data.data.shape)
 
@@ -74,16 +71,6 @@ pickle.dump(clf, open("model.pkl", "wb"))
 
 
 
-
-
-
-
-
-
-
-
-
-
 # For testing.
 
 import pickle
@@ -105,3 +92,7 @@ X_new_tfidf = loaded_tfidf.transform(X_new_counts)
 predicted = loaded_model.predict(X_new_tfidf)
 
 print(category_list[predicted[0]])
+
+
+
+
